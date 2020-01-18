@@ -1,0 +1,15 @@
+name: Build openvario documentation
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Pull docker
+      run: docker pull linuxianer99/documentation-build-container
+    - name: Run container test
+      run: docker run --name ovbuild -v ${{ github.workspace }}:/data linuxianer99/documentation-build-container make pdf
